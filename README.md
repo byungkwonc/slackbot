@@ -2,6 +2,7 @@
 [client]
 - slack api로 bot을 생성
 - slack workspace에 생성한 app 추가
+
 [server]
 - slack에서 message가 전송되면,
 - OpenAI ChatGPT API로 response를 생성하여 slack에 전달
@@ -23,4 +24,4 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 ## API Documentation
-The API documentation can be found at `http://localhost:8000/docs` once the application is running.
+- `http://127.0.0.1:8000/docs`
