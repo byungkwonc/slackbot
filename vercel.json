@@ -1,5 +1,8 @@
 {
-    "redirects": [{
+    "functions": {
+        "app/main.py": {"runtime": "@vercel/python"}
+    },
+    "rewrites": [{
         "source": "/(.*)", "destination": "/app/main.py"
     }]
 }
