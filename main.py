@@ -1,11 +1,11 @@
-#pip install slack_bolt
-
 import os
+
+#pip install slack_bolt
 from slack_bolt import App
 
 app = App(
-    slack_token = os.environ.get("slack_token"),
-    _secret = os.environ.get("SLACK_SIGNING_SECRET") 
+    token = os.environ.get("SLACK_BOT_TOKEN"),
+    signing_secret = os.environ.get("SLACK_SIGNING_SECRET") 
 )
 
 if __name__ == "__main__":
