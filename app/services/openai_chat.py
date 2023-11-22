@@ -35,7 +35,7 @@ class Model(Enum):
 
 @retry(
     wait=wait_random_exponential(min=2, max=5),
-    stop=stop_after_attempt(5),
+    stop=stop_after_attempt(1),
     retry=retry_if_exception_type(RateLimitError),
 )
 async def completions_with_backoff(**kwargs):

@@ -27,7 +27,7 @@ class Model(Enum):
 
 @retry(
     wait=wait_random_exponential(min=2, max=5),
-    stop=stop_after_attempt(5),
+    stop=stop_after_attempt(1),
     retry=retry_if_exception_type(RateLimitError),
 )
 async def completions_with_backoff(**kwargs):
@@ -39,10 +39,10 @@ async def get_completions(
     message: str,
     model: Model = Query(Model.TEXT_DAVINCI_003, description=model_description),
     max_tokens: int = Query(2048, description=max_tokens_description),
-    temperature: float = Query(1, description=temperature_description),
+    temperature: float = Query(0.5, description=temperature_description),
     top_p: float = Query(1, description=top_p_description),
-    presence_penalty: float = Query(0.5, description=presence_penalty_description),
-    frequency_penalty: float = Query(0.5, description=frequency_penalty_description),
+    presence_penalty: float = Query(0, description=presence_penalty_description),
+    frequency_penalty: float = Query(0, description=frequency_penalty_description),
 ):
     openai.api_key = api_key
 
