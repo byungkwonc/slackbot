@@ -27,5 +27,5 @@ if __name__ == "__main__":
         #port=8000,
         access_log=False,
         reload=True,
-        timeout_keep_alive=65,
+        timeout_keep_alive=60,
     )
