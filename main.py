@@ -18,6 +18,12 @@ def message_hello(message, say):
     # say() sends a message to the channel where the event was triggered
     say(f"Hey there <@{message['user']}>!")
 
+# default response
+@app.get("/")
+async def root():
+    return Response("Hello ChatGPT Applications!")
+
+# Home tab
 @app.event("app_home_opened")
 def update_home_tab(client, event, logger):
   try:
