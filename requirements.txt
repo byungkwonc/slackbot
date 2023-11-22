@@ -3,7 +3,7 @@ fastapi==0.95.0
 google-generativeai
 itsdangerous==2.1.2
 openai==0.27.2
-slack-sdk==3.20.2
+slack-sdk==3.24.0
 tenacity==8.2.2
 uvicorn==0.21.0
 slack_bolt==1.18.0
