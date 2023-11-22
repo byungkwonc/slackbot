@@ -7,5 +7,6 @@ slack-sdk==3.20.2
 tenacity==8.2.2
 uvicorn==0.21.0
 slack_bolt==1.18.0
+python-dotenv==1.0.0
 
 urllib3==1.26.15

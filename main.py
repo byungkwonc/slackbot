@@ -1,12 +1,11 @@
+from dotenv import load_dotenv
+
 import os
 
 #pip install slack_bolt
 from slack_bolt import App
 
-token = os.environ.get("SLACK_BOT_TOKEN")
-signing_secret = os.environ.get("SLACK_SIGNING_SECRET") 
-
-print("SLACK_BOT_TOKEN=", token)
+load_dotenv()
 
 app = App(
     token = os.environ.get("SLACK_BOT_TOKEN"),
