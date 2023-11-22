@@ -47,10 +47,10 @@ async def get_chatgpt(
     messages: list,
     model: str = Query(Model.GPT_3_5_TURBO.value, description=model_description),
     max_tokens: int = Query(2048, description=max_tokens_description),
-    temperature: float = Query(0.7, description=temperature_description),
+    temperature: float = Query(0.5, description=temperature_description),
     top_p: float = Query(1, description=top_p_description),
-    presence_penalty: float = Query(0.5, description=presence_penalty_description),
-    frequency_penalty: float = Query(0.5, description=frequency_penalty_description),
+    presence_penalty: float = Query(0, description=presence_penalty_description),
+    frequency_penalty: float = Query(0, description=frequency_penalty_description),
 ):
     openai.api_key = api_key
 

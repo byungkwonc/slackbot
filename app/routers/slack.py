@@ -36,10 +36,10 @@ async def call_chatgpt(slack_message: dict):
         messages=messages,
         model=model if model else Model.GPT_3_5_TURBO.value,
         max_tokens=2048,
-        temperature=0.7,
+        temperature=0.5,
         top_p=1,
-        presence_penalty=0.5,
-        frequency_penalty=0.5,
+        presence_penalty=0,
+        frequency_penalty=0,
     )
 
     message = ""
