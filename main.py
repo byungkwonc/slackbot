@@ -1,12 +1,11 @@
 from dotenv import load_dotenv
+load_dotenv()
 
 import os
-from starlette.responses import Response
 #pip install slack_bolt
 from slack_bolt import App
 
-load_dotenv()
-
+# Initializes your app with your bot token and signing secret
 app = App(
     token = os.environ.get("SLACK_BOT_TOKEN"),
     signing_secret = os.environ.get("SLACK_SIGNING_SECRET") 
@@ -17,11 +16,6 @@ app = App(
 def message_hello(message, say):
     # say() sends a message to the channel where the event was triggered
     say(f"Hey there <@{message['user']}>!")
-
-# default response
-@app.get("/")
-async def root():
-    return Response("Hello ChatGPT Applications!")
 
 # Home tab
 @app.event("app_home_opened")

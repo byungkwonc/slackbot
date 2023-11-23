@@ -19,7 +19,7 @@
 ### Enable your app's home
 - Home tabs
 
-## Local Envirinment
+## Local Environment
 
 ### virtual environment
 - create `python3 -m venv .venv`
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     app.start(port=int(os.environ.get("PORT", 3000)))
 
 ```
-- run `python3 app.py`
+- run `python3 main.py`
 
 ## Subscribing to events
 
@@ -122,4 +122,4 @@ def update_home_tab(client, event, logger):
     logger.error(f"Error publishing home tab: {e}")
 
 ```
-- run `python3 app.py`
+- run `python3 main.py`
