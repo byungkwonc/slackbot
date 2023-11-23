@@ -11,6 +11,13 @@ app = App(
     signing_secret = os.environ.get("SLACK_SIGNING_SECRET") 
 )
 
+# Request url verification
+@app.request("/slack/event")
+async def slack(message: dict):
+    if message.get("challenge"):
+        return message.get("challenge")
+
+
 # Listens to incoming messages that contain "hello"
 @app.message("hello")
 def message_hello(message, say):
