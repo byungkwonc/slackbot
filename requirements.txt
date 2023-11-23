@@ -1,2 +1,12 @@
 slack_bolt==1.18.0
 python-dotenv==1.0.0
+
+backoff==2.2.1
+fastapi==0.95.0
+google-generativeai
+itsdangerous==2.1.2
+openai==0.27.2
+slack-sdk==3.24.0
+tenacity==8.2.2
+uvicorn==0.21.0
+urllib3==1.26.15
