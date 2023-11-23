@@ -1,27 +1,125 @@
-# slackbot
-[client]
-- slack api로 bot을 생성
-- slack workspace에 생성한 app 추가
+# Building an app with Bolt for Python
 
-[server]
-- slack에서 message가 전송되면,
-- OpenAI ChatGPT API로 response를 생성하여 slack에 전달
+## Bolt for Python
+- [Bolt for Python](https://slack.dev/bolt-python/concepts)
 
-# 환경변수
-- slack_token
-- openai_token
-- number_of_messages_to_keep
-- system_content
+## Getting Started
 
-## Local 실행
-1. local 환경 구성
-```bash
-pip install -r requirements.txt
+### Creating a Slack App
+- https://api.slack.com/apps?new_app=1&ref=bolt_start_hub
+
+### Requesting scopes
+- OAuth & Permissions > Bot Token Scopes
+- Add an OAuth Scope, Add the `chat:write` scope
+
+### Installing your app
+- Install App To Workspace
+- OAuth & Permissions > Bot User OAuth Access Token > Copy!!
+
+### Enable your app's home
+- Home tabs
+
+## Local Envirinment
+
+### virtual environment
+- create `python3 -m venv .venv`
+- activate `source .venv/bin/activate`
+
+### app credentials
+- `SLACK_BOT_TOKEN`
+- `SLACK_SIGNING_SECRET`
+
+## Developing your app
+
+### Installing the Bolt Python package
+- `pip install slack_bolt`
+
+### Initializing your app
 ```
+import os
+# Use the package we installed
+from slack_bolt import App
 
-2. application 실행
-```bash
-uvicorn app.main:app --reload
+# Initializes your app with your bot token and signing secret
+app = App(
+    token=os.environ.get("SLACK_BOT_TOKEN"),
+    signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
+)
+
+# Add functionality here
+# @app.event("app_home_opened") etc
+
+
+# Start your app
+if __name__ == "__main__":
+    app.start(port=int(os.environ.get("PORT", 3000)))
+
 ```
-## API Documentation
-- `http://127.0.0.1:8000/docs`
+- run `python3 app.py`
+
+## Subscribing to events
+
+### Event Subscriptions
+- Request URL : `https://slackbot-chatgpt.vercel.app/slack/events`
+- subscribe to the `app_home_opened` event
+
+## Responding to events
+
+### set up a basic listener
+- using the `app_home_opened` event
+- publishes a view to your Home tab
+
+### listener code
+```
+@app.event("app_home_opened")
+def update_home_tab(client, event, logger):
+  try:
+    # views.publish is the method that your app uses to push a view to the Home tab
+    client.views_publish(
+      # the user that opened your app's app home
+      user_id=event["user"],
+      # the view object that appears in the app home
+      view={
+        "type": "home",
+        "callback_id": "home_view",
+
+        # body of the view
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Welcome to your _App's Home_* :tada:"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "This button won't do much for now but you can set up a listener for it using the `actions()` method and passing its unique `action_id`. See an example in the `examples` folder within your Bolt app."
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Click me!"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    )
+
+  except Exception as e:
+    logger.error(f"Error publishing home tab: {e}")
+
+```
+- run `python3 app.py`
