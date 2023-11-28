@@ -12,7 +12,7 @@ app = App(
 )
 
 # Request url verification
-@app.command("/slack/event")
+@app.command("/slack/events")
 async def slack(message: dict):
     if message.get("challenge"):
         return message.get("challenge")
